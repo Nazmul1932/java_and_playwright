@@ -1,9 +1,10 @@
 package mobile_refueling_dev.TestCases;
 
 import com.microsoft.playwright.Page;
-import mobile_refueling_dev.utils.PlayWrightFactory;
 import mobile_refueling_dev.pages.LoginLogoutPage;
+import mobile_refueling_dev.pages.MerchantRegistrationPage;
 import mobile_refueling_dev.pages.MyProfilePage;
+import mobile_refueling_dev.utils.PlayWrightFactory;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
@@ -14,10 +15,11 @@ public class BaseTest {
     Page page;
     protected LoginLogoutPage loginLogoutPage;
     protected MyProfilePage myProfilePage;
+    protected MerchantRegistrationPage merchantRegistrationPage;
     protected Properties properties;
 
     @BeforeTest
-    public void setUp(){
+    public void setUp() {
         playWrightFactory = new PlayWrightFactory();
         properties = playWrightFactory.initProperties();
         page = playWrightFactory.initBrowser(properties);
@@ -25,7 +27,7 @@ public class BaseTest {
     }
 
     @AfterTest
-    public void tearDown(){
+    public void tearDown() {
         if (page != null) {
             page.context().browser().close();
         }
