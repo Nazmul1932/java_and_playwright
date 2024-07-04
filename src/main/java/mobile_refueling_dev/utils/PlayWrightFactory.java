@@ -70,12 +70,22 @@ public class PlayWrightFactory {
     }
 
     private BrowserContext initBrowserContext() {
-        return getBrowser().newContext(new Browser.NewContextOptions()
+        BrowserContext context = getBrowser().newContext(new Browser.NewContextOptions()
                 .setRecordVideoDir(Paths.get("Videos/"))
                 .setRecordVideoSize(1280, 720)
                 .setIgnoreHTTPSErrors(true)
                 .setBypassCSP(true)
                 .setViewportSize(1500, 900));
+        context.tracing().start(new Tracing.StartOptions()
+                .setScreenshots(true)
+                .setSnapshots(true)
+                .setSources(true));
+        return context;
+    }
+
+    public void stopTracing() {
+        getBrowserContext().tracing().stop(new Tracing.StopOptions()
+                .setPath(Paths.get("trace.zip")));
     }
 
     public Properties initProperties() {

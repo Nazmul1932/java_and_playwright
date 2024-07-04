@@ -28,6 +28,7 @@ public class BaseTest {
 
     @AfterTest
     public void tearDown() {
+        playWrightFactory.stopTracing();
         if (page != null) {
             page.context().browser().close();
         }
